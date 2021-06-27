@@ -28,6 +28,7 @@ public class Dequeue {
     public void addFirst(int value) {
         // YOUR CODE HERE
     	sentHead.next = new Link(value, sentHead.next);
+    	size++;
     }
 
     public void addLast(int value) {
@@ -36,20 +37,23 @@ public class Dequeue {
     	while (ptr.next != sentTail)
     		ptr = ptr.next;
     	ptr.next = new Link(value, ptr.next);
+    	size++;
     }
 
     public int removeFirst() {
         // YOUR CODE HERE
-    	if (size == 0)
-    		throw new RuntimeException();
+    	if (isEmpty())
+    		return -1;// throw new RuntimeException();
     	
-    	return sentHead.next.value;
+    	int temp = sentHead.next.value;
+    	sentHead.next = sentHead.next.next;
+    	return temp;
     }
 
     public int removeLast() {
         // YOUR CODE HERE
-    	if (size == 0)
-    		throw new RuntimeException();
+    	if (isEmpty())
+    		return -1;// throw new RuntimeException();
     	
     	Link ptr = sentHead;
     	while (ptr.next.next != sentTail)
@@ -80,5 +84,29 @@ public class Dequeue {
     		ptr = ptr.next;
     	return ptr.value;
     }
+    
+    /*
+    public String toString() {
+    	String res = "SentHead -> ";
+    	Link ptr = sentHead.next;
+    	while (ptr != sentTail) {
+    		res += ptr.value + " -> ";
+    		ptr = ptr.next;
+    	}
+    	res += "SentTail -> ";
+    	return res;
+    }
+    
+    public static void main(String[] args) {
+    	Dequeue q = new Dequeue();
+    	System.out.println(q);
+    	q.addFirst(10);
+    	System.out.println(q);
+    	q.addLast(20);
+    	System.out.println(q);
+    	q.removeLast();
+    	System.out.println(q);
+    	System.out.println(q.get(1));
+    }*/
 
 }
