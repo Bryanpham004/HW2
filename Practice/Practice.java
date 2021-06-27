@@ -2,6 +2,8 @@ package Practice;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Practice {
 
@@ -79,33 +81,43 @@ public class Practice {
        * */
 
        // YOUR CODE HERE
+	   Queue<String> q = new LinkedList<String>();
 	   int numIslands = 0;
+	   
 	   for (int i = 0; i < grid.length; i++) {
 		   for (int z = 0; z < grid[i].length; z++) {
-			   if (grid[i][z] != '0') {
-				   islandDfs(grid, i, z);
+			   if (inBounds(grid, i, z)) {
+				   String temp = i + " " + z;
+				   q.add(temp);
+				   while (!q.isEmpty()) {
+					   temp = q.poll();
+					   int x = Integer.parseInt(temp.substring(0, temp.indexOf(" ")));
+                       int y = Integer.parseInt(temp.substring(temp.indexOf(" ") + 1));
+                       if (inBounds(grid, x, y)) {
+                           grid[x][y] = '0';
+                           if (inBounds(grid, x - 1, y))
+                               q.add((x - 1) + " " + y);
+                           if (inBounds(grid, x + 1, y))
+                               q.add((x + 1) + " " + y);
+                           if (inBounds(grid, x, y + 1))
+                               q.add(x + " " + (y + 1));
+                           if (inBounds(grid, x, y - 1))
+                               q.add(x + " " + (y - 1));
+                       }
+				   }
 				   numIslands++;
 			   }
 		   }
 	   }
 	   return numIslands;
-	   
        // HINT: Can use a similar technique as the solution for numConnectedComponents, with small modification.
        // You ARE allowed to modify the input 2D array grid....
    }
    
-   private void islandDfs(char[][] grid, int x, int y) {
-	   grid[x][y] = '0';
-	   if (x - 1 >= 0)
-		   islandDfs(grid, x - 1, y);
-	   if (x + 1 < grid.length)
-		   islandDfs(grid, x + 1, y);
-	   if (y - 1 >= 0)
-		   islandDfs(grid, x, y - 1);
-	   if (y + 1 < grid[x].length)
-		   islandDfs(grid, x, y + 1);
+   private boolean inBounds(char[][] grid, int i, int z) {
+	   return i >= 0 && z >= 0 && i < grid.length && z < grid[i].length && grid[i][z] == '1';
    }
-
+   
    public boolean isValid(String s) {
        /*
         Given a string s containing just the characters '(' and ')'
