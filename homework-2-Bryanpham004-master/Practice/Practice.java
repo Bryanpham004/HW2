@@ -29,10 +29,25 @@ public class Practice {
        *
        * */
 
-
        // YOUR CODE HERE
-
-
+	   int numConnectedComponents = 0;
+	   boolean[] visited = new boolean[graph.size()];
+	   for (int i = 0; i < graph.size(); i++) {
+		   if (visited[i] == false) {
+			   dfs(visited, graph, i);
+			   numConnectedComponents++;
+		   }
+	   }
+	   return numConnectedComponents;
+   }
+   
+   private void dfs(boolean[] visited, ArrayList<ArrayList<Integer>> graph, int index) {
+	   visited[index] = true;
+	   ArrayList<Integer> neighbors = graph.get(index);
+	   for (int i = 0; i < neighbors.size(); i++) {
+		   if (visited[neighbors.get(i)] == false)
+			   dfs(visited, graph, neighbors.get(i));
+	   }
    }
 
    public int numIslands(char[][] grid) {
@@ -64,9 +79,31 @@ public class Practice {
        * */
 
        // YOUR CODE HERE
-
+	   int numIslands = 0;
+	   for (int i = 0; i < grid.length; i++) {
+		   for (int z = 0; z < grid[i].length; z++) {
+			   if (grid[i][z] != '0') {
+				   islandDfs(grid, i, z);
+				   numIslands++;
+			   }
+		   }
+	   }
+	   return numIslands;
+	   
        // HINT: Can use a similar technique as the solution for numConnectedComponents, with small modification.
        // You ARE allowed to modify the input 2D array grid....
+   }
+   
+   private void islandDfs(char[][] grid, int x, int y) {
+	   grid[x][y] = '0';
+	   if (x - 1 >= 0)
+		   islandDfs(grid, x - 1, y);
+	   if (x + 1 < grid[x].length)
+		   islandDfs(grid, x + 1, y);
+	   if (y - 1 >= 0)
+		   islandDfs(grid, x, y - 1);
+	   if (y + 1 < grid.length)
+		   islandDfs(grid, x, y + 1);
    }
 
    public boolean isValid(String s) {
@@ -112,8 +149,19 @@ public class Practice {
 
         */
 
-       Stack<Character> stack = new Stack<>();
-
+       // Stack<Character> stack = new Stack<>(); lol too cool for stacks
+	   
+	   int var = 0;
+	   for (int i = 0; i < s.length(); i++) {
+		   if (s.substring(i, i + 1).equals("("))
+			   var++;
+		   else {
+			   if (var == 0)
+				   return false;
+			   var--;
+		   }
+	   }
+	   return var == 0;
 
    }
 
