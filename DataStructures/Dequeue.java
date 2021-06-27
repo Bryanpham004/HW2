@@ -45,6 +45,8 @@ public class Dequeue {
     	if (isEmpty())
     		throw new RuntimeException();
     	
+    	size--;
+    	
     	int temp = sentHead.next.value;
     	sentHead.next = sentHead.next.next;
     	return temp;
@@ -55,12 +57,17 @@ public class Dequeue {
     	if (isEmpty())
     		throw new RuntimeException();
     	
-    	Link ptr = sentHead;
-    	while (ptr.next.next != sentTail)
-    		ptr = ptr.next;
+    	Link prev = sentHead;
+    	Link curr = sentHead.next;
+    	while (curr.next != sentTail) {
+    		prev = curr;
+    		curr = curr.next;
+    	}
     	
-    	int temp = ptr.next.value;
-    	ptr.next = ptr.next.next;
+    	size--;
+    	
+    	int temp = curr.value;
+    	prev.next = curr.next;
     	return temp;
     }
 
@@ -85,7 +92,6 @@ public class Dequeue {
     	return ptr.value;
     }
     
-    /*
     public String toString() {
     	String res = "SentHead -> ";
     	Link ptr = sentHead.next;
@@ -104,8 +110,8 @@ public class Dequeue {
     	q.addFirst(20);
     	q.addLast(100);
     	System.out.println(q);
-    	System.out.println(q.removeFirst());
+    	System.out.println(q.removeLast());
     	System.out.println(q);
-    }*/
+    }
 
 }
