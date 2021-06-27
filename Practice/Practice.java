@@ -98,11 +98,11 @@ public class Practice {
 	   grid[x][y] = '0';
 	   if (x - 1 >= 0)
 		   islandDfs(grid, x - 1, y);
-	   if (x + 1 < grid[x].length)
+	   if (x + 1 < grid.length)
 		   islandDfs(grid, x + 1, y);
 	   if (y - 1 >= 0)
 		   islandDfs(grid, x, y - 1);
-	   if (y + 1 < grid.length)
+	   if (y + 1 < grid[x].length)
 		   islandDfs(grid, x, y + 1);
    }
 

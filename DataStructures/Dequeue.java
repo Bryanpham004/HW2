@@ -85,7 +85,6 @@ public class Dequeue {
     	return ptr.value;
     }
     
-    /*
     public String toString() {
     	String res = "SentHead -> ";
     	Link ptr = sentHead.next;
@@ -101,12 +100,11 @@ public class Dequeue {
     	Dequeue q = new Dequeue();
     	System.out.println(q);
     	q.addFirst(10);
+    	q.addFirst(20);
+    	q.addLast(100);
     	System.out.println(q);
-    	q.addLast(20);
+    	System.out.println(q.removeFirst());
     	System.out.println(q);
-    	q.removeLast();
-    	System.out.println(q);
-    	System.out.println(q.get(1));
-    }*/
+    }
 
 }
