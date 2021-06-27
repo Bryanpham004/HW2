@@ -43,7 +43,7 @@ public class Dequeue {
     public int removeFirst() {
         // YOUR CODE HERE
     	if (isEmpty())
-    		throw new RuntimeException();
+    		throw new IllegalArgumentException();
     	
     	size--;
     	
@@ -55,7 +55,7 @@ public class Dequeue {
     public int removeLast() {
         // YOUR CODE HERE
     	if (isEmpty())
-    		throw new RuntimeException();
+    		throw new IllegalArgumentException();
     	
     	Link prev = sentHead;
     	Link curr = sentHead.next;
@@ -91,7 +91,7 @@ public class Dequeue {
     		ptr = ptr.next;
     	return ptr.value;
     }
-    
+    /*
     public String toString() {
     	String res = "SentHead -> ";
     	Link ptr = sentHead.next;
@@ -112,6 +112,6 @@ public class Dequeue {
     	System.out.println(q);
     	System.out.println(q.removeLast());
     	System.out.println(q);
-    }
+    }*/
 
 }
